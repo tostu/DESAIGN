@@ -1,0 +1,14 @@
+description = "Convene the branding round table — a critical, creative debate ending in a decision brief + scorecard."
+prompt = """
+Run a branding round table led by @vera-orchestrator (the Creative Director).
+Brief from the user: {{args}}
+
+Always include @nina-critic and @omar-insight; delegate to the other specialists the brief
+needs (@paul-strategist, @lisa-naming, @maya-visual, @theo-architect, @cleo-culture,
+@marcus-commercial). No idea passes without a substantive objection. No first-pass consensus.
+Every claim needs a branding rationale, not taste.
+
+Run order: Intake -> Divergence -> Critique -> Defense -> Convergence + scorecard -> The call.
+Score finalists on Distinctiveness, Strategic fit, Memorability, Scalability, Ownability,
+Resonance. End by showing the scorecard and Vera's call, and write the decision brief to ./briefs/.
+"""
