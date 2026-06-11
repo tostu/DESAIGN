@@ -24,8 +24,9 @@ LOCAL_DIR=""
 ACTION="install"        # install | uninstall
 DRY=0
 
-PERSONAS=(vera-orchestrator paul-strategist lisa-naming maya-visual omar-insight \
-          nina-critic theo-architect cleo-culture marcus-commercial felix-market)
+PERSONAS=(vera-orchestrator paul-strategist lisa-naming sol-linguist maya-visual \
+          omar-insight nina-critic theo-architect cleo-culture marcus-commercial \
+          felix-market rex-availability)
 MB="# >>> branding-round-table >>>"
 ME="# <<< branding-round-table <<<"
 
@@ -123,119 +124,29 @@ strip_block() {
 # ============================ command bodies ============================
 write_claude_cmd() {
   run "mkdir -p '$CLAUDE_CMDS'"
-  if [[ $DRY -eq 1 ]]; then step "would write $CLAUDE_CMDS/brand-debate.md"; return; fi
-  cat > "$CLAUDE_CMDS/brand-debate.md" <<'CMD'
----
-description: Convene the branding round table — a critical, creative debate ending in a decision brief + scorecard.
-argument-hint: <what you're branding> (e.g. "name a B2B fintech for freelancers")
----
-Run a **branding round table** by adopting the `vera-orchestrator` sub-agent (the Creative
-Director). Brief from the user: **$ARGUMENTS**
-
-Rules: always include `nina-critic` and `omar-insight`; pull in the other specialists the
-brief needs (`paul-strategist`, `lisa-naming`, `maya-visual`, `theo-architect`,
-`cleo-culture`, `marcus-commercial`, `felix-market`). On naming rounds, always seat
-`felix-market` — he runs the 6-test companyness check on every shortlist. No idea passes without a substantive objection. No
-first-pass consensus. Every claim needs a branding rationale, not taste.
-
-Run order: Intake → Divergence → Critique → Defense → Convergence + scorecard → The call.
-Score finalists on Distinctiveness, Strategic fit, Memorability, Scalability, Ownability,
-Resonance. End by showing the scorecard and Vera's call inline, and write the decision brief
-(winner, the one reason it wins, what it trades away, dissent on record) to `./briefs/`.
-CMD
+  if [[ $DRY -eq 1 ]]; then step "would copy $SCRIPT_DIR/.claude/commands/brand-debate.md -> $CLAUDE_CMDS/brand-debate.md"; return; fi
+  cp "$SCRIPT_DIR/.claude/commands/brand-debate.md" "$CLAUDE_CMDS/brand-debate.md"
   step "wrote $CLAUDE_CMDS/brand-debate.md"
 }
 
 write_claude_brief_cmd() {
   run "mkdir -p '$CLAUDE_CMDS'"
-  if [[ $DRY -eq 1 ]]; then step "would write $CLAUDE_CMDS/brand-brief.md"; return; fi
-  cat > "$CLAUDE_CMDS/brand-brief.md" <<'CMD'
----
-description: Run the brand personality quiz — 8 chapters of deep questions to build a full Brand Brief before the debate.
-argument-hint: <what you're branding> (e.g. "a B2B fintech for freelancers")
----
-You are running the `/brand-brief` workflow. Read `.agents/workflows/brand-brief.md` in full
-before doing anything else — it contains every chapter, every question, and the rules.
-
-Project from the user: **$ARGUMENTS**
-
-If no project is provided, open as Vera and ask for one.
-
-⚠️ Check your execution environment. If the Task tool is available, spawn each chapter's
-host persona as a real sub-agent. If not, run in Single-Agent Mode: voice each persona in
-character under their name, with the same depth and rigour.
-
-Run order:
-1. Vera opens — introduce the 8 chapters, get consent to start.
-2. Chapter 1 — Paul (The Spark): purpose, one word to own, founding story.
-3. Chapter 2 — Omar (The People): audience truth, assumptions; Felix guest probe.
-4. Chapter 3 — Paul + Cleo + Omar (The World): competition, category, distinctiveness.
-5. Chapter 4 — Paul (The Soul): values, non-negotiables; silent 9-ideals check.
-6. Chapter 5 — Lisa (The Voice): tone, forced choices, say-it-out-loud test.
-7. Chapter 6 — Maya + Cleo (The Face): visual instincts, distinctive asset.
-8. Chapter 7 — Nina (The Tension): shadow, pre-mortem, hostile reading. Do NOT rush.
-9. Chapter 8 — Theo + Marcus (The Horizon): scale, architecture, commercial reality.
-10. Synthesis — Omar distils signal/tension/opportunity; read back, invite correction.
-11. Vera writes the brief using `templates/brand-brief-template.md`. Quote exact words.
-12. Read back, revise once, lock. Save to `briefs/<YYYY-MM-DD>-<slug>-brief.md`.
-
-One question at a time. "I don't know" = open question, not a gap. Do not propose names
-or positioning — record instincts, save opinions for `/brand-debate`. Flag contradictions.
-CMD
+  if [[ $DRY -eq 1 ]]; then step "would copy $SCRIPT_DIR/.claude/commands/brand-brief.md -> $CLAUDE_CMDS/brand-brief.md"; return; fi
+  cp "$SCRIPT_DIR/.claude/commands/brand-brief.md" "$CLAUDE_CMDS/brand-brief.md"
   step "wrote $CLAUDE_CMDS/brand-brief.md"
 }
 
 write_gemini_cmd() {
   run "mkdir -p '$GEMINI_CMDS'"
-  if [[ $DRY -eq 1 ]]; then step "would write $GEMINI_CMDS/brand-debate.toml"; return; fi
-  cat > "$GEMINI_CMDS/brand-debate.toml" <<'CMD'
-description = "Convene the branding round table — a critical, creative debate ending in a decision brief + scorecard."
-prompt = """
-Run a branding round table led by @vera-orchestrator (the Creative Director).
-Brief from the user: {{args}}
-
-Always include @nina-critic and @omar-insight; delegate to the other specialists the brief
-needs (@paul-strategist, @lisa-naming, @maya-visual, @theo-architect, @cleo-culture,
-@marcus-commercial, @felix-market). On naming rounds, always seat @felix-market — he
-runs the 6-test companyness check on every shortlist. No idea passes without a substantive objection. No first-pass consensus.
-Every claim needs a branding rationale, not taste.
-
-Run order: Intake -> Divergence -> Critique -> Defense -> Convergence + scorecard -> The call.
-Score finalists on Distinctiveness, Strategic fit, Memorability, Scalability, Ownability,
-Resonance. End by showing the scorecard and Vera's call, and write the decision brief
-(winner, the one reason it wins, what it trades away, dissent on record) to ./briefs/.
-"""
-CMD
+  if [[ $DRY -eq 1 ]]; then step "would copy $SCRIPT_DIR/.gemini/commands/brand-debate.toml -> $GEMINI_CMDS/brand-debate.toml"; return; fi
+  cp "$SCRIPT_DIR/.gemini/commands/brand-debate.toml" "$GEMINI_CMDS/brand-debate.toml"
   step "wrote $GEMINI_CMDS/brand-debate.toml"
 }
 
 write_gemini_brief_cmd() {
   run "mkdir -p '$GEMINI_CMDS'"
-  if [[ $DRY -eq 1 ]]; then step "would write $GEMINI_CMDS/brand-brief.toml"; return; fi
-  cat > "$GEMINI_CMDS/brand-brief.toml" <<'CMD'
-description = "Run the brand personality quiz — 8 chapters of deep questions to build a full Brand Brief before the debate."
-prompt = """
-Run the /brand-brief workflow. Read `.agents/workflows/brand-brief.md` in full first.
-
-Project from the user: {{args}}
-
-Voice each chapter's host persona in character. Chapter owners:
-  1 The Spark      -> @paul-strategist
-  2 The People     -> @omar-insight (+ @felix-market guest probe)
-  3 The World      -> @paul-strategist + @cleo-culture + @omar-insight
-  4 The Soul       -> @paul-strategist
-  5 The Voice      -> @lisa-naming
-  6 The Face       -> @maya-visual + @cleo-culture
-  7 The Tension    -> @nina-critic  (do NOT rush this chapter)
-  8 The Horizon    -> @theo-architect + @marcus-commercial
-  Synthesis        -> @omar-insight distils, @vera-orchestrator writes the brief
-
-One question at a time. "I don't know" = mark as open question.
-Do not propose names or positioning — record instincts, save opinions for /brand-debate.
-Flag contradictions between chapters explicitly.
-Write the final brief to briefs/<YYYY-MM-DD>-<slug>-brief.md using templates/brand-brief-template.md.
-"""
-CMD
+  if [[ $DRY -eq 1 ]]; then step "would copy $SCRIPT_DIR/.gemini/commands/brand-brief.toml -> $GEMINI_CMDS/brand-brief.toml"; return; fi
+  cp "$SCRIPT_DIR/.gemini/commands/brand-brief.toml" "$GEMINI_CMDS/brand-brief.toml"
   step "wrote $GEMINI_CMDS/brand-brief.toml"
 }
 
@@ -246,11 +157,13 @@ For any branding task — naming, positioning, identity, rebrand, tagline, tone 
 brand audit — do NOT answer with a single opinion. Run a critical, creative round table as
 **Vera**, the Creative Director, voicing each persona in turn (single-agent mode).
 
-Team: Vera (orchestrator) · Paul (strategy) · Lisa (naming/verbal) · Maya (visual) ·
-Omar (insight — always) · Nina (critic — always) · Theo (architecture) · Cleo (culture) ·
-Marcus (commercial/legal) · Felix (market proxy — seat on naming rounds). Built-in friction:
-Paul(enduring) vs Cleo(now); Lisa(name) vs Felix(companyness) vs Marcus(trademark) vs
-Theo(system); Maya(timeless) vs Nina(prove it).
+Team: Vera (orchestrator) · Paul (strategy) · Lisa (naming/verbal) · Sol (linguistic
+explorer — always) · Maya (visual) · Omar (insight — always) · Nina (critic — always) ·
+Theo (architecture) · Cleo (culture) · Marcus (commercial/legal) · Felix (market proxy —
+seat on naming rounds) · Rex (availability enforcer — clearance gate after every divergence
+round; RED cards are non-negotiable kills). Built-in friction: Paul(enduring) vs Cleo(now);
+Lisa(orthodox) vs Sol(structural tension) vs Felix(companyness) vs Marcus(trademark) vs
+Theo(system); Maya(timeless) vs Nina(prove it); Rex vs everyone who falls in love too fast.
 
 House rules: (1) no idea passes without a substantive objection; no first-pass consensus.
 (2) critique the idea, not the person. (3) every claim needs a branding rationale, not taste.
