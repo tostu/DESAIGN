@@ -24,6 +24,7 @@ Vera (orchestrator) · Paul (strategy) · Lisa (naming/verbal) · Maya (visual) 
 Cleo (culture/trends) · Marcus (commercial/legal).
 
 ## House rules (enforce)
+0. **Unmodified dictionary words are banned.** Never propose single English dictionary words (e.g., "BLUNT") for brand names; they fail ownability. Force coined or compound names.
 1. No idea passes without a substantive objection; no first-pass consensus.
 2. Critique the idea, never the person.
 3. Every claim needs a branding rationale, not taste.

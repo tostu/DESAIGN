@@ -85,9 +85,20 @@ From this folder:
 /brand-debate name a B2B fintech for freelance designers
 ```
 
-Or just describe the branding task — Claude will pull in Vera and the team. Vera spawns each
-specialist as a real sub-agent so they argue in separate contexts, then writes the brief.
-Tip: you can also call one specialist directly, e.g. *"have Nina red-team this tagline."*
+Run it via **`/brand-debate`**, not by calling `@vera` as a sub-agent. The command runs Vera
+in the **main thread**, which is the only place that reliably spawns sub-agents — she then
+launches each specialist with the Task tool (in parallel for the divergence round) and
+shuttles their critiques between rounds, because sub-agents can't talk to each other directly.
+You can also call one specialist directly, e.g. *"have Nina red-team this tagline."*
+
+> **Vera isn't spawning sub-agents / she's role-playing everyone herself?**
+> That happens when she's invoked *as* a sub-agent (sub-agents historically can't spawn
+> sub-agents) or told to "be the team" without being told to delegate. Fix: use
+> `/brand-debate` so she runs in the main thread, and the command now explicitly instructs
+> her to use the **Task tool** for every specialist and to stop if she catches herself
+> typing "Paul: …" without having launched Paul. If you'd rather she just voices everyone
+> inline (faster, cheaper, no real separate contexts), that's the single-agent mode
+> Antigravity uses — tell her "single-agent mode" and she'll role-play the round table.
 
 ## Run it in Gemini CLI
 

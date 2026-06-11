@@ -25,7 +25,7 @@ ACTION="install"        # install | uninstall
 DRY=0
 
 PERSONAS=(vera-orchestrator paul-strategist lisa-naming maya-visual omar-insight \
-          nina-critic theo-architect cleo-culture marcus-commercial)
+          nina-critic theo-architect cleo-culture marcus-commercial felix-market)
 MB="# >>> branding-round-table >>>"
 ME="# <<< branding-round-table <<<"
 
@@ -93,11 +93,16 @@ fi
 has() { local x; for x in "${TARGETS[@]}"; do [[ "$x" == "$1" ]] && return 0; done; return 1; }
 
 copy_personas() {
-  local dest="$1"; run "mkdir -p '$dest'"
+  local dest="$1" strip_meta="${2:-0}"; run "mkdir -p '$dest'"
   local f base
   for f in "$SRC_PERSONAS"/*.md; do
     base="$(basename "$f" | sed -E 's/^[0-9]+-//')"
-    run "cp '$f' '$dest/$base'"
+    if [[ $strip_meta -eq 1 ]]; then
+      if [[ $DRY -eq 1 ]]; then step "would copy (strip meta) $base -> $dest"; continue; fi
+      sed -E '/^(color|emoji|vibe):/d' "$f" > "$dest/$base"
+    else
+      run "cp '$f' '$dest/$base'"
+    fi
   done
 }
 
@@ -129,7 +134,8 @@ Director). Brief from the user: **$ARGUMENTS**
 
 Rules: always include `nina-critic` and `omar-insight`; pull in the other specialists the
 brief needs (`paul-strategist`, `lisa-naming`, `maya-visual`, `theo-architect`,
-`cleo-culture`, `marcus-commercial`). No idea passes without a substantive objection. No
+`cleo-culture`, `marcus-commercial`, `felix-market`). On naming rounds, always seat
+`felix-market` — he runs the 6-test companyness check on every shortlist. No idea passes without a substantive objection. No
 first-pass consensus. Every claim needs a branding rationale, not taste.
 
 Run order: Intake → Divergence → Critique → Defense → Convergence + scorecard → The call.
@@ -151,7 +157,8 @@ Brief from the user: {{args}}
 
 Always include @nina-critic and @omar-insight; delegate to the other specialists the brief
 needs (@paul-strategist, @lisa-naming, @maya-visual, @theo-architect, @cleo-culture,
-@marcus-commercial). No idea passes without a substantive objection. No first-pass consensus.
+@marcus-commercial, @felix-market). On naming rounds, always seat @felix-market — he
+runs the 6-test companyness check on every shortlist. No idea passes without a substantive objection. No first-pass consensus.
 Every claim needs a branding rationale, not taste.
 
 Run order: Intake -> Divergence -> Critique -> Defense -> Convergence + scorecard -> The call.
@@ -172,8 +179,9 @@ brand audit — do NOT answer with a single opinion. Run a critical, creative ro
 
 Team: Vera (orchestrator) · Paul (strategy) · Lisa (naming/verbal) · Maya (visual) ·
 Omar (insight — always) · Nina (critic — always) · Theo (architecture) · Cleo (culture) ·
-Marcus (commercial/legal). Give them built-in friction: Paul(enduring) vs Cleo(now);
-Lisa(name) vs Marcus(trademark) vs Theo(system); Maya(timeless) vs Nina(prove it).
+Marcus (commercial/legal) · Felix (market proxy — seat on naming rounds). Built-in friction:
+Paul(enduring) vs Cleo(now); Lisa(name) vs Felix(companyness) vs Marcus(trademark) vs
+Theo(system); Maya(timeless) vs Nina(prove it).
 
 House rules: (1) no idea passes without a substantive objection; no first-pass consensus.
 (2) critique the idea, not the person. (3) every claim needs a branding rationale, not taste.
@@ -201,7 +209,7 @@ printf '%sBranding Round Table%s  ·  %s  ·  scope=%s\n\n' "$B" "$R" "$ACTION" 
 
 if [[ "$ACTION" == "install" ]]; then
   if has claude;      then say "Claude Code";  copy_personas "$CLAUDE_AGENTS"; step "personas -> $CLAUDE_AGENTS"; write_claude_cmd; fi
-  if has gemini;      then say "Gemini CLI";   copy_personas "$GEMINI_AGENTS"; step "personas -> $GEMINI_AGENTS"; write_gemini_cmd; fi
+  if has gemini;      then say "Gemini CLI";   copy_personas "$GEMINI_AGENTS" 1; step "personas -> $GEMINI_AGENTS"; write_gemini_cmd; fi
   if has antigravity; then say "Antigravity";  upsert_antigravity; fi
   if [[ "$SCOPE" == "local" ]]; then
     run "mkdir -p '$LOCAL_DIR/briefs' '$LOCAL_DIR/templates'"
