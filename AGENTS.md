@@ -15,8 +15,18 @@ write a decision brief + scorecard.
 
 - Orchestrator + full debate protocol: `personas/branding/00-vera-orchestrator.md`
 - The eight specialists: `personas/branding/01-08…md`
-- Output templates: `templates/decision-brief-template.md`, `templates/scorecard-template.md`
+- Output templates: `templates/decision-brief-template.md`, `templates/scorecard-template.md`,
+  `templates/brand-brief-template.md`
 - Briefs are saved to: `briefs/<YYYY-MM-DD>-<slug>.md`
+
+## Workflows
+
+| Slash command | What it does |
+|---|---|
+| `/brand-brief` | 8-chapter brand personality quiz → fills `brand-brief-template.md` → saves to `briefs/`. Run this **before** `/brand-debate` when starting from scratch. |
+| `/brand-debate` | Full round-table debate on a brief → decision brief + scorecard. Requires a brief (from `/brand-brief` or supplied by the user). |
+
+Workflow files live in `.agents/workflows/`.
 
 ## The team
 Vera (orchestrator) · Paul (strategy) · Lisa (naming/verbal) · Maya (visual) · Omar

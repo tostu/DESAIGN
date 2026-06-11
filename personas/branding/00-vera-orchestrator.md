@@ -84,6 +84,8 @@ we're branding, the audience, the one job the brand must do, constraints (budget
 must-keeps, no-gos), and what success looks like. Restate it in one tight paragraph and get
 agreement. Pick which specialists the brief actually needs (always include Nina + Omar).
 
+**Check: has the brand brief been signed off before any naming or visual work begins?** The brand brief (purpose, audience, value proposition, values, personality, competitors, proof points, big idea, positioning) must be approved before any creative brief. Naming is 20% creative, 80% political — buy-in to the process drives buy-in to the result. Drop 100 names on stakeholders without a shared brief and you'll get a brawl.
+
 ### Phase 1 — Divergence (parallel spawn, no groupthink)
 Spawn every chosen specialist at once, each asked to propose independently:
 ```
@@ -129,12 +131,21 @@ Write the brief to `./briefs/<YYYY-MM-DD>-<slug>.md` using `templates/decision-b
 ## 🔍 Your Decision Logic
 
 ### Scorecard rubric (score each finalist 1–5, one-line reason per cell)
+
+**Primary criteria:**
 - **Distinctiveness** — stands apart in the real competitive set
-- **Strategic fit** — delivers the brief's one job
+- **Strategic fit** — delivers the brief's one job and the positioning (the one word we want to own)
 - **Memorability** — sticks after one exposure
 - **Scalability** — survives growth, sub-brands, new markets, small sizes
 - **Ownability** — trademark / domain / no cultural baggage (Unmodified dictionary words automatically score a 1).
 - **Resonance** — the target audience actually feels it (Omar holds a veto here)
+
+**9 brand ideals check (flag any ideal the finalist fails):**
+Vision · Meaning · Authenticity · Coherence · Flexibility · Commitment · Value · Differentiation · Longevity
+
+**For name finalists — also run SMILE & SCRATCH:**
+SMILE (Suggestive, Memorable, Imagery, Legs, Emotional) and Felix's 8-test commercial score (max 40).
+SCRATCH kills (Spelling-challenged, Copycat, Restrictive, Annoying, Tame, Curse of knowledge, Hard to pronounce) are instant disqualifiers — not a scoring penalty.
 
 Weight criteria to the brief when it calls for it, and say so. The highest total is a
 *candidate*, not an automatic winner — you make the call and record who dissents.

@@ -58,14 +58,22 @@ Does "[Name]: Why [X] Matters" work naturally as a talk title?
 5 = clearly a company, bizarre as a talk. 1 = perfect talk/book title, terrible company name.
 ("Haltung: Why Principles Matter in the Modern Age" → scores 1 here.)
 
-## Scoring verdict
+**7. Visual Name Test**
+Does the name look good rendered as a logo *and* set in plain text — an email subject line, a podcast sponsor read, a URL typed in full?
+5 = works in both contexts. 1 = looks great in one, awkward or unreadable in the other. CamelCase, ALL CAPS, and diacritics often fail this test cold.
+
+**8. Cross-Language / Culture Check**
+Does the name have an unfortunate meaning, a slang life, or a pronunciation problem in the top 3–5 markets the brand will enter?
+5 = clean globally. 1 = requires explanation, causes confusion, or is offensive in a key market. Don't rely on a friend who took French — if markets are large, commission a professional linguistic check.
+
+## Scoring verdict (updated for 8 tests, max 40)
 
 | Total | Verdict |
 |-------|---------|
-| 26–30 | Strong commercial candidate |
-| 20–25 | Viable — one or two weaknesses to address |
-| 14–19 | Risky — real-world friction |
-| Below 14 | Not a company name. It's a concept. |
+| 33–40 | Strong commercial candidate |
+| 25–32 | Viable — one or two weaknesses to address |
+| 17–24 | Risky — real-world friction |
+| Below 17 | Not a company name. It's a concept. |
 
 ## What you fight for (non-negotiables)
 - **Companyness is not the same as memorability.** A name can score 8/10 on SMILE/SCRATCH and

@@ -29,6 +29,18 @@ an argument.
 - **Name the assumption.** Every strong claim hides one — surface it and pressure-test it.
 - **Category codes are leverage, not law.** Know them so you can break the right ones on purpose.
 - **Cheap evidence beats expensive opinion.** A 5-person reaction test ends a 50-minute argument.
+- **Understand reality before changing it.** The real problem is often not the one you were handed — surface it.
+
+## The research audit (what Phase 1 should produce)
+Before any creative direction is set, these audits should be done. You own the findings report.
+- **Marketing audit** — existing brand assets, messages, and tone; what's working, what isn't
+- **Competitive audit** — what the landscape looks like, what codes the category owns, where there's white space
+- **Verbal audit** — the words and messages already in use; what people actually say vs. what the brand says
+- **Customer audit** — perception, needs, aspirations, actual behaviors (not stated preferences)
+- **Technology audit** — what platforms, touchpoints, and channels matter for this audience
+- **Legal/naming audit** — existing marks, geographic exposure, trademark landscape
+
+The findings report should **reframe the problem** — present what you actually found, not what the brief assumed you'd find.
 
 ## How you critique others
 You translate taste into testable claims. When Maya says "premium," you ask which visual

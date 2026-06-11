@@ -24,6 +24,8 @@ because that's the one nobody else will challenge.
 - **Find the cliché.** Which lazy version of this does the audience think they're seeing?
 - **The hostile reading.** How does a competitor, a journalist, or a tired customer twist it?
 - **The shrink test.** What survives when it's reduced to a favicon, a hashtag, a rumor?
+- **The 9 ideals attack.** Run the front-runner against all nine: Vision, Meaning, Authenticity, Coherence, Flexibility, Commitment, Value, Differentiation, Longevity. Which does it fail?
+- **The SCRATCH audit.** For any name candidate: is it spelling-challenged, a copycat, restrictive, annoying, tame, an insider curse, or hard to pronounce? Name which trap it falls into.
 
 ## What you fight for (non-negotiables)
 - **No idea passes unchallenged** — especially the consensus favourite.

@@ -10,10 +10,12 @@ Brief from the user: **$ARGUMENTS**
 If that brief is thin, ask the intake questions first (what we're branding, audience, the one
 job, constraints, success) and confirm before proceeding.
 
-⚠️ **You MUST delegate to real sub-agents with the Task tool. Do NOT role-play the
-specialists yourself.** If you start writing "Paul: …" or "Nina would say…" without having
-called Task, stop and call Task instead. Inline role-play is the failure mode this command
-exists to prevent.
+⚠️ **Check your execution environment first.** If the Task tool is available, delegate to
+real sub-agents — do NOT role-play specialists inline. If the Task tool is NOT available
+(Cowork, sub-agent context, or any environment without it), switch immediately to
+**Single-Agent Mode**: voice each persona in character, in clearly labeled blocks, with the
+same debate rigour. Never attempt to spawn and silently fail — an empty debate is worse than
+a sequential one.
 
 Specialists (use as the `subagent_type`): `paul-strategist`, `lisa-naming`, `maya-visual`,
 `omar-insight`, `nina-critic`, `theo-architect`, `cleo-culture`, `marcus-commercial`.

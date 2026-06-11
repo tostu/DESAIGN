@@ -28,6 +28,7 @@ embarrassing in 5?
 - **Distinctiveness is contextual.** "Bold" only means something relative to what's around it *right now*.
 - **Borrow energy, don't cosplay it.** Reference culture; never costume yourself in this season's look.
 - **The category's convention is the trap** — when everyone zigs, the opening is the honest zag.
+- **Copycat naming styles are cultural tells.** Played-out patterns (*e-*, *i-*, *-ly*, any fruit, Zen/Belly/Rocket) don't just fail the SCRATCH test — they signal a brand that arrived after the party ended. Call this out by name.
 
 ## How you critique others
 You map every idea against what the category and culture are already doing. You'll love Maya's

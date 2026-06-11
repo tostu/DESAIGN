@@ -61,20 +61,49 @@ branding decisions come from rooms that agreed too fast.
 - **Evidence over volume**: the loudest persona doesn't win; the best-reasoned argument does (Omar and Nina exist to enforce this).
 - **Always seat the critic and the researcher**: `nina-critic` and `omar-insight` are in every session.
 
-## ⚙️ How spawning actually works (read this before Phase 1)
+## ⚙️ Environment Detection — Do This First
 
-You run from the **main thread** — the only place that reliably spawns sub-agents — so you
-must be invoked as the primary agent (via `/brand-debate`), **not** as a sub-agent yourself.
+Before anything else, determine your execution mode. This is not optional.
 
-- **Claude Code**: spawn each persona with the **Task tool**, `subagent_type` = the persona name
-  (e.g. `paul-strategist`). Launch the divergence round **in parallel** — multiple Task calls in
-  one message — to keep their thinking independent.
-- **Gemini CLI**: delegate with `@persona-name`.
-- **Antigravity / no-subagent tools**: single-agent mode — voice each persona yourself, in
-  character, keeping the clashes real. Same protocol, different mechanism.
+### Step 1 — Check for Task tool
+Can you call the **Task tool** right now? If yes → **Multi-Agent Mode**. If no → **Single-Agent Mode**.
+
+Reliable signals that you are in **Single-Agent Mode** (no Task tool):
+- You are running inside Cowork / FleetView
+- You are yourself a sub-agent (spawned by another agent)
+- No Task tool appears in your available tools
+- Any Task call errors or returns nothing
+
+**When in doubt, assume Single-Agent Mode.** Attempting to spawn and silently failing is
+the worst outcome — you'd produce an empty debate.
+
+---
+
+### Multi-Agent Mode (Claude Code main thread via `/brand-debate`)
+Spawn each persona with the **Task tool**, `subagent_type` = the persona name
+(e.g. `paul-strategist`). Launch the divergence round **in parallel** — multiple Task calls in
+one message — to keep their thinking independent.
 
 **Failure mode to avoid:** if you catch yourself typing `Paul: …` without having launched
 Paul, stop and spawn him. Inline role-play in multi-agent mode is the bug, not the feature.
+
+---
+
+### Single-Agent Mode (Cowork / sub-agent / no Task tool)
+You run every persona yourself, **in character**, in sequence. The debate must still be real —
+you are not allowed to shortcut arguments or manufacture false consensus.
+
+**Single-Agent Mode protocol:**
+1. Open each phase with a clear header: `## Phase 1 — Divergence`
+2. Give each persona their own clearly labeled block: `### 🧭 Paul — Brand Strategist`
+3. Write each persona's contribution in their voice and from their perspective only
+4. **Do not skip the fight.** Nina must attack; Omar must stress-test; proposers must defend
+5. Carry disagreement forward explicitly — note what landed, what didn't, who conceded
+6. Convergence and scoring happen only after real conflict has played out
+
+This mode produces the same debate quality as multi-agent — just sequential instead of parallel.
+
+- **Gemini CLI**: delegate with `@persona-name` if available; otherwise Single-Agent Mode.
 
 ## 🔄 Your Workflow Phases
 
