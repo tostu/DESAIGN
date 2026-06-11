@@ -146,6 +146,45 @@ CMD
   step "wrote $CLAUDE_CMDS/brand-debate.md"
 }
 
+write_claude_brief_cmd() {
+  run "mkdir -p '$CLAUDE_CMDS'"
+  if [[ $DRY -eq 1 ]]; then step "would write $CLAUDE_CMDS/brand-brief.md"; return; fi
+  cat > "$CLAUDE_CMDS/brand-brief.md" <<'CMD'
+---
+description: Run the brand personality quiz — 8 chapters of deep questions to build a full Brand Brief before the debate.
+argument-hint: <what you're branding> (e.g. "a B2B fintech for freelancers")
+---
+You are running the `/brand-brief` workflow. Read `.agents/workflows/brand-brief.md` in full
+before doing anything else — it contains every chapter, every question, and the rules.
+
+Project from the user: **$ARGUMENTS**
+
+If no project is provided, open as Vera and ask for one.
+
+⚠️ Check your execution environment. If the Task tool is available, spawn each chapter's
+host persona as a real sub-agent. If not, run in Single-Agent Mode: voice each persona in
+character under their name, with the same depth and rigour.
+
+Run order:
+1. Vera opens — introduce the 8 chapters, get consent to start.
+2. Chapter 1 — Paul (The Spark): purpose, one word to own, founding story.
+3. Chapter 2 — Omar (The People): audience truth, assumptions; Felix guest probe.
+4. Chapter 3 — Paul + Cleo + Omar (The World): competition, category, distinctiveness.
+5. Chapter 4 — Paul (The Soul): values, non-negotiables; silent 9-ideals check.
+6. Chapter 5 — Lisa (The Voice): tone, forced choices, say-it-out-loud test.
+7. Chapter 6 — Maya + Cleo (The Face): visual instincts, distinctive asset.
+8. Chapter 7 — Nina (The Tension): shadow, pre-mortem, hostile reading. Do NOT rush.
+9. Chapter 8 — Theo + Marcus (The Horizon): scale, architecture, commercial reality.
+10. Synthesis — Omar distils signal/tension/opportunity; read back, invite correction.
+11. Vera writes the brief using `templates/brand-brief-template.md`. Quote exact words.
+12. Read back, revise once, lock. Save to `briefs/<YYYY-MM-DD>-<slug>-brief.md`.
+
+One question at a time. "I don't know" = open question, not a gap. Do not propose names
+or positioning — record instincts, save opinions for `/brand-debate`. Flag contradictions.
+CMD
+  step "wrote $CLAUDE_CMDS/brand-brief.md"
+}
+
 write_gemini_cmd() {
   run "mkdir -p '$GEMINI_CMDS'"
   if [[ $DRY -eq 1 ]]; then step "would write $GEMINI_CMDS/brand-debate.toml"; return; fi
@@ -170,6 +209,36 @@ CMD
   step "wrote $GEMINI_CMDS/brand-debate.toml"
 }
 
+write_gemini_brief_cmd() {
+  run "mkdir -p '$GEMINI_CMDS'"
+  if [[ $DRY -eq 1 ]]; then step "would write $GEMINI_CMDS/brand-brief.toml"; return; fi
+  cat > "$GEMINI_CMDS/brand-brief.toml" <<'CMD'
+description = "Run the brand personality quiz — 8 chapters of deep questions to build a full Brand Brief before the debate."
+prompt = """
+Run the /brand-brief workflow. Read `.agents/workflows/brand-brief.md` in full first.
+
+Project from the user: {{args}}
+
+Voice each chapter's host persona in character. Chapter owners:
+  1 The Spark      -> @paul-strategist
+  2 The People     -> @omar-insight (+ @felix-market guest probe)
+  3 The World      -> @paul-strategist + @cleo-culture + @omar-insight
+  4 The Soul       -> @paul-strategist
+  5 The Voice      -> @lisa-naming
+  6 The Face       -> @maya-visual + @cleo-culture
+  7 The Tension    -> @nina-critic  (do NOT rush this chapter)
+  8 The Horizon    -> @theo-architect + @marcus-commercial
+  Synthesis        -> @omar-insight distils, @vera-orchestrator writes the brief
+
+One question at a time. "I don't know" = mark as open question.
+Do not propose names or positioning — record instincts, save opinions for /brand-debate.
+Flag contradictions between chapters explicitly.
+Write the final brief to briefs/<YYYY-MM-DD>-<slug>-brief.md using templates/brand-brief-template.md.
+"""
+CMD
+  step "wrote $GEMINI_CMDS/brand-brief.toml"
+}
+
 antigravity_block() {
   cat <<'RULE'
 # Branding Round Table (auto-installed)
@@ -188,10 +257,20 @@ House rules: (1) no idea passes without a substantive objection; no first-pass c
 (4) proposers defend or concede out loud. (5) creativity is mandatory. (6) Vera breaks ties
 and records the dissent.
 
-Run order every time: Intake → Divergence → Critique → Defense → Convergence + scorecard →
-The call. Score finalists on Distinctiveness, Strategic fit, Memorability, Scalability,
-Ownability, Resonance. Write the decision brief (winner, the one reason it wins, what it
-trades away, dissent on record) to ./briefs/<YYYY-MM-DD>-<slug>.md.
+Workflows:
+  /brand-brief  — Run BEFORE /brand-debate when starting from scratch. Omar hosts an
+                  8-chapter brand personality quiz (The Spark · The People · The World ·
+                  The Soul · The Voice · The Face · The Tension · The Horizon). Each chapter
+                  is led by the right specialist. Nina owns Chapter 7 (The Tension) and must
+                  not be rushed. Omar distils the signal; Vera writes the brief to
+                  briefs/<YYYY-MM-DD>-<slug>-brief.md using templates/brand-brief-template.md.
+                  One question at a time. Do not propose names or positioning here.
+
+  /brand-debate — Run AFTER /brand-brief (or with a supplied brief). Full round-table debate:
+                  Intake → Divergence → Critique → Defense → Convergence + scorecard → The call.
+                  Score finalists on Distinctiveness, Strategic fit, Memorability, Scalability,
+                  Ownability, Resonance. Write the decision brief (winner, the one reason it
+                  wins, what it trades away, dissent on record) to ./briefs/<YYYY-MM-DD>-<slug>.md.
 RULE
 }
 
@@ -208,8 +287,8 @@ printf '%sBranding Round Table%s  ·  %s  ·  scope=%s\n\n' "$B" "$R" "$ACTION" 
 [[ ! -d "$SRC_PERSONAS" ]] && { echo "Cannot find personas at $SRC_PERSONAS"; exit 1; }
 
 if [[ "$ACTION" == "install" ]]; then
-  if has claude;      then say "Claude Code";  copy_personas "$CLAUDE_AGENTS"; step "personas -> $CLAUDE_AGENTS"; write_claude_cmd; fi
-  if has gemini;      then say "Gemini CLI";   copy_personas "$GEMINI_AGENTS" 1; step "personas -> $GEMINI_AGENTS"; write_gemini_cmd; fi
+  if has claude;      then say "Claude Code";  copy_personas "$CLAUDE_AGENTS"; step "personas -> $CLAUDE_AGENTS"; write_claude_cmd; write_claude_brief_cmd; fi
+  if has gemini;      then say "Gemini CLI";   copy_personas "$GEMINI_AGENTS" 1; step "personas -> $GEMINI_AGENTS"; write_gemini_cmd; write_gemini_brief_cmd; fi
   if has antigravity; then say "Antigravity";  upsert_antigravity; fi
   if [[ "$SCOPE" == "local" ]]; then
     run "mkdir -p '$LOCAL_DIR/briefs' '$LOCAL_DIR/templates'"
@@ -217,13 +296,14 @@ if [[ "$ACTION" == "install" ]]; then
     if has antigravity; then run "mkdir -p '$LOCAL_DIR/.agents/rules' '$LOCAL_DIR/.agents/workflows'"
       run "cp '$SCRIPT_DIR/.agents/rules/branding-agency.md' '$LOCAL_DIR/.agents/rules/' 2>/dev/null || true"
       run "cp '$SCRIPT_DIR/.agents/workflows/brand-debate.md' '$LOCAL_DIR/.agents/workflows/' 2>/dev/null || true"
+      run "cp '$SCRIPT_DIR/.agents/workflows/brand-brief.md'  '$LOCAL_DIR/.agents/workflows/' 2>/dev/null || true"
     fi
   fi
   echo; say "Done."
-  echo "${D}Try it:  Claude/Antigravity → /brand-debate <brief>   ·   Gemini → /agents reload, then /brand-debate <brief>${R}"
+  echo "${D}Try it:  Claude/Antigravity → /brand-brief <project>  then  /brand-debate <brief>   ·   Gemini → /agents reload, then /brand-brief or /brand-debate${R}"
 else
-  if has claude;      then say "Removing Claude Code";  remove_personas "$CLAUDE_AGENTS"; run "rm -f '$CLAUDE_CMDS/brand-debate.md'"; fi
-  if has gemini;      then say "Removing Gemini CLI";   remove_personas "$GEMINI_AGENTS"; run "rm -f '$GEMINI_CMDS/brand-debate.toml'"; fi
+  if has claude;      then say "Removing Claude Code";  remove_personas "$CLAUDE_AGENTS"; run "rm -f '$CLAUDE_CMDS/brand-debate.md' '$CLAUDE_CMDS/brand-brief.md'"; fi
+  if has gemini;      then say "Removing Gemini CLI";   remove_personas "$GEMINI_AGENTS"; run "rm -f '$GEMINI_CMDS/brand-debate.toml' '$GEMINI_CMDS/brand-brief.toml'"; fi
   if has antigravity; then say "Removing Antigravity";  strip_block "$AG_AGENTSMD"; fi
   echo; say "Uninstalled."
 fi

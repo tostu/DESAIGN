@@ -1,14 +1,26 @@
-description = "Convene the branding round table — a critical, creative debate ending in a decision brief + scorecard."
+description = "Convene the branding round table — multiple brainstorm waves, Rex clearance gates, persona jury vote with threshold, restarts if no name earns it."
 prompt = """
-Run a branding round table led by @vera-orchestrator (the Creative Director).
+Run an extended branding round table led by @vera-orchestrator (the Creative Director).
 Brief from the user: {{args}}
 
-Always include @nina-critic and @omar-insight; delegate to the other specialists the brief
-needs (@paul-strategist, @lisa-naming, @maya-visual, @theo-architect, @cleo-culture,
-@marcus-commercial). No idea passes without a substantive objection. No first-pass consensus.
-Every claim needs a branding rationale, not taste.
+Always seat @nina-critic, @omar-insight, and @sol-linguist (pair Sol with @lisa-naming — they are complementary). Include other specialists as the brief needs (@paul-strategist, @maya-visual, @theo-architect, @cleo-culture, @marcus-commercial). No idea passes without a substantive objection. No first-pass consensus. Every claim needs a branding rationale, not taste.
 
-Run order: Intake -> Divergence -> Critique -> Defense -> Convergence + scorecard -> The call.
-Score finalists on Distinctiveness, Strategic fit, Memorability, Scalability, Ownability,
-Resonance. End by showing the scorecard and Vera's call, and write the decision brief to ./briefs/.
+@rex-availability is NOT a creative voice. He is a hard clearance gate. Spawn him after every name-generation phase. His RED cards kill names immediately — no debate, no override. YELLOW cards go to @marcus-commercial to assess commercial viability before the name can advance.
+
+Run order:
+1. Intake — confirm brief, audience, constraints, success.
+2. Divergence A — each specialist proposes three options (safe, bold, wildcard) independently. Sol generates at least one oxymoron, one thesaurus-chain arrival, and one distant-domain compound.
+3. Rex Clearance A — Rex clears all Round-1 names (trademark, .com, handles, company names, SLURL). RED = removed. YELLOW = flagged to Marcus. Continue with GREEN + YELLOW pool only.
+4. Wide Reveal + Critique — share cleared pool; each attacks ≥2 others and names one unexplored gap; Nina red-teams front-runners hardest.
+5. Divergence B — each specialist proposes two genuinely new ideas from the critique; no re-submitting old ideas. Sol applies same structural requirements.
+6. Rex Clearance B — Rex clears all Divergence-B names. Same rules.
+7. Cross-pollination — each specialist proposes ≥1 hybrid combining ideas from different rounds; minimum three hybrids enter the pool. Sol may apply morpheme surgery.
+8. Rex Clearance C — Rex clears all hybrid names. Same rules.
+9. Defense + Pressure Test — Nina red-teams the 4–5 front-runners from the fully cleared pool; proposers rebut or withdraw.
+10. Convergence + Criteria Scorecard — narrow to 3 finalists from across ALL rounds (GREEN or YELLOW-resolved only); score on Distinctiveness, Strategic fit, Memorability, Scalability, Ownability, Resonance.
+11. Persona Jury Vote — every creative specialist (not Rex) scores each finalist 1–5 holistically (blind, no conferring) with a one-line rationale. Sol votes on structural originality and linguistic strength.
+12. Threshold Gate — a finalist may win only if jury average ≥ 3.5 AND no single persona scored it a 1 (veto). If no finalist passes: fill the Gap Analysis, run targeted Divergence C (Sol included), Rex Clearance D, return to step 9. Repeat until a name earns it. Do not force a winner.
+13. The Call — Vera picks from eligible finalists, states one reason it wins, what it trades away, who dissents; write brief to ./briefs/. Close with Rex's disclaimer: first-pass clearance only — a trademark attorney must clear the final pick before launch.
+
+Rex's clearance is not optional and not overridable. A forced winner nobody believes in is worse than restarting.
 """

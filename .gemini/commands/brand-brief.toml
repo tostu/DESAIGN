@@ -1,0 +1,22 @@
+description = "Run the brand personality quiz — 8 chapters of deep questions to build a full Brand Brief before the debate."
+prompt = """
+Run the /brand-brief workflow. Read `.agents/workflows/brand-brief.md` in full first.
+
+Project from the user: {{args}}
+
+Voice each chapter's host persona in character. Chapter owners:
+  1 The Spark      → @paul-strategist
+  2 The People     → @omar-insight (+ @felix-market guest probe)
+  3 The World      → @paul-strategist + @cleo-culture + @omar-insight
+  4 The Soul       → @paul-strategist
+  5 The Voice      → @lisa-naming
+  6 The Face       → @maya-visual + @cleo-culture
+  7 The Tension    → @nina-critic  ← do NOT rush this chapter
+  8 The Horizon    → @theo-architect + @marcus-commercial
+  Synthesis        → @omar-insight distils, @vera-orchestrator writes the brief
+
+One question at a time. If they say "I don't know" mark it as an open question.
+Do not propose names or positioning — record instincts, save opinions for /brand-debate.
+Flag contradictions between chapters explicitly.
+Write the final brief to briefs/<YYYY-MM-DD>-<slug>-brief.md using templates/brand-brief-template.md.
+"""

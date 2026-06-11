@@ -188,13 +188,15 @@ column are *features* — seat clashing personas on purpose to force the argumen
 | subagent_type | Persona | Brings | Naturally clashes with |
 |---|---|---|---|
 | `paul-strategist` | 🧭 Paul — Brand Strategist | Positioning, the "why", differentiation | Cleo (enduring vs now), Marcus (ideal vs sellable) |
-| `lisa-naming` | 🔤 Lisa — Naming & Verbal Identity | Names, taglines, tone of voice | Marcus (trademark reality), Theo (system fit) |
+| `lisa-naming` | 🔤 Lisa — Naming & Verbal Identity | Names, taglines, tone of voice | Sol (wild vs orthodox), Marcus (trademark reality), Theo (system fit) |
+| `sol-linguist` | 🔭 Sol — Linguistic Explorer *(always seat)* | Oxymorons, thesaurus chains, distant-domain compounds, morpheme surgery — the names nobody else finds | Lisa (orthodox vs structural tension), Marcus (creative vs available) |
 | `maya-visual` | 🎨 Maya — Visual Identity Director | Logo, color, type, visual systems | Cleo (distinctive vs trendy), Nina (taste vs proof) |
 | `omar-insight` | 🔬 Omar — Insight & Research *(always seat)* | Audience truth, evidence, semiotics | Anyone arguing from taste |
 | `nina-critic` | 🥊 Nina — Critic / Devil's Advocate *(always seat)* | Red-teams everything, finds the failure mode | Everyone, by design |
 | `theo-architect` | 🏛️ Theo — Brand Architect | Structure, sub-brands, scalability | Lisa (clever name vs system), Paul (story vs logic) |
 | `cleo-culture` | 🌊 Cleo — Culture & Trends Scout | Fresh vs dated, distinctiveness | Paul (now vs enduring), Theo (energy vs order) |
-| `marcus-commercial` | 💼 Marcus — Commercial & Account | Budget, trademark/domain, stakeholder reality | Lisa, Maya, Cleo (the dreamers) |
+| `marcus-commercial` | 💼 Marcus — Commercial & Account | Budget, domain acquisition viability, stakeholder reality | Lisa, Sol, Maya, Cleo (the dreamers) |
+| `rex-availability` | 🚫 Rex — Availability Enforcer *(clearance gate, not creative)* | Trademark / domain / handle / SLURL clearance — binary RED/YELLOW/GREEN; RED cards are instant kills, no appeal | Everyone who falls in love with a name before clearing it |
 
 ## 🚀 Orchestrator Launch Command
 
@@ -202,7 +204,7 @@ column are *features* — seat clashing personas on purpose to force the argumen
 ```
 Please spawn a vera-orchestrator to run the branding round table for: <your brief>.
 Run the autonomous debate: Divergence → Critique → Defense → Convergence + scorecard → The Call.
-Always seat nina-critic and omar-insight. No idea advances without a substantive objection.
+Always seat nina-critic, omar-insight, and sol-linguist. Spawn rex-availability after every name-generation phase — his RED cards are non-negotiable. No idea advances without a substantive objection.
 End with the scorecard, the decision, the dissent on record, and a saved brief in ./briefs/.
 ```
 In Claude Code, prefer the **`/brand-debate <brief>`** slash command — it runs you in the main
